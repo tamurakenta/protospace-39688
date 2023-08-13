@@ -1,0 +1,54 @@
+<main class="main">
+  <div class="inner">
+    <div class="protospace__wrapper">
+      <p class="protospace__hedding">
+        <%= @protospace.title %>
+      </p>
+      <%= link_to "by #{@protospace.user.name}", user_path(@protospace.user), class: :protospace__user %>
+      <% if current_user == @protospace.user%>
+        <div class="protospace__manage">
+          <%= link_to "編集する", edit_protospace_path(@protospace), class: :protospace__btn %>
+          <%= link_to "削除する", protospace_path(@protospace), data: { turbo_method: :delete }, class: :protospace__btn %>
+        </div>
+      <% end %>
+      <div class="protospace__image">
+        <%= image_tag @protospace.image %>
+      </div>
+      <div class="protospace__body">
+        <div class="protospace__detail">
+          <p class="detail__title">キャッチコピー</p>
+          <p class="detail__message">
+            <%= @protospace.catch_copy %>
+          </p>
+        </div>
+        <div class="protospace__detail">
+          <p class="detail__title">コンセプト</p>
+          <p class="detail__message">
+            <%= @protospace.concept %>
+          </p>
+        </div>
+      </div>
+      <div class="protospace__comments">
+        <% if user_signed_in? %>
+          <%= form_with model: [@protospace, @comment], local: true do |f|%>
+            <div class="field">
+              <%= f.label :content, "コメント" %><br />
+              <%= f.text_field :content, id:"comment_content" %>
+            </div>
+            <div class="actions">
+              <%= f.submit "送信する", class: :form__btn  %>
+            </div>
+          <% end %>
+        <% end %>
+        <ul class="comments_lists">
+          <% @comments.each do |comment| %>
+            <li class="comments_list">
+              <%= comment.content%>
+              <%= link_to "（#{comment.user.name}）", user_path(comment.user), class: :comment_user %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>

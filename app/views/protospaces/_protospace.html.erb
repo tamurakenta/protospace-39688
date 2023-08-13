@@ -1,0 +1,10 @@
+<div class="card">
+  <%= link_to image_tag(protospace.image, class: :card__img ), protospace_path(protospace) %>
+  <div class="card__body">
+    <%= link_to protospace.title, protospace_path(protospace), class: :card__title%>
+    <p class="card__summary">
+      <%= protospace.catch_copy %>
+    </p>
+    <%= link_to "by #{protospace.user.name}", user_path(protospace.user), class: :card__user %>
+  </div>
+</div>
