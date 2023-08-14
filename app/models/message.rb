@@ -1,6 +1,6 @@
 class Message < ApplicationRecord
   belongs_to :user
-  belongs_to :prototype
+  belongs_to :protospace
 
   validates :content, presence: true
 end

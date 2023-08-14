@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to protospace_id(@comment.protospace)
+      redirect_to protospace_url(@comment.protospace)
     else
       @protospace = @comment.protospace
       @comments = @protospace.comments
